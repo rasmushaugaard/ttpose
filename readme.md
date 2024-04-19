@@ -6,20 +6,19 @@ This repo includes an interface for Universal Robots using [ur_rtde](https://git
 It should, however, be relatively easy to adapt to other robot interfaces. See [robot.py](src/ttpose/robot.py).
 
 ## Demo
-
-TODO: link to colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1cnn9opNJYzKDm377Nr6X_1GPiDK5VaQF?usp=sharing)
 
 ## Install
 
 ```bash
-$ pip install git+[this repo (https)]
+$ pip install git+https://github.com/rasmushaugaard/ttpose.git
 ```
 
 If you're experiencing problems with the installation, try making a clean virtual environment first, e.g. with conda ([miniconda](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)):
 ```bash
 $ conda create -n ttpose python=3.10
 $ conda activate ttpose
-$ pip install git+[this repo (https)]
+$ pip install git+https://github.com/rasmushaugaard/ttpose.git
 ```
 
 ## Usage
@@ -43,14 +42,14 @@ Replace `cube` by `cone` and `cyl`.
 For the remaining results, you need the repo:
 
 ```bash
-git clone [this repo]
+git clone https://github.com/rasmushaugaard/ttpose.git
 cd ttpose/experiments
 ```
 
 Figure 2:
 ```bash
 $ ./run_simulation_exp.sh
-$ ./analyze_sim_exp.py  # see ´logo_err.pdf´
+$ ./analyze_sim_exp.py  # saves ´logo_err.pdf´
 ```
 Note that refactoring changed the order of calls to the random generator, so the figure is slightly different from the one in the paper.
 
