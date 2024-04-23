@@ -127,7 +127,34 @@ result_dict["confidence_regions"] = ttpose.compute_confidence_regions(
 
 
 if not args.quiet:
-    print(json.dumps(result_dict, indent=4))
+    print()
+
+    bound = result_dict["bound"]
+    print(
+        "bound: "
+        f"angle={np.rad2deg(bound['angle']):.2e} deg, "
+        f"dist={bound['dist']:.2e} m."
+    )
+    if world_R_obj_gt is not None:
+        print(
+            f"bound center err: "
+            f"angle={np.rad2deg(Rotation.from_matrix(world_R_obj_gt.T @ pose_set.rotational_bound[0]).magnitude()):.2e} deg, "
+            f"dist={np.linalg.norm(world_t_obj_gt[:, 0] - pose_set.positional_bound[0][:, 0]):.2e} m."
+        )
+
+    for region in result_dict["confidence_regions"]:
+        print(
+            f"conf {region['conf']*100:.0f}: "
+            f"angle={np.rad2deg(region['angle']):.2e} deg, "
+            f"dist={region['distance']:.2e} m."
+        )
+    if world_R_obj_gt is not None:
+        print(
+            f"expected pose err: "
+            f"angle={np.rad2deg(Rotation.from_matrix(world_R_obj_gt.T @ world_R_exp_obj).magnitude()):.2e} deg, "
+            f"dist={np.linalg.norm(world_t_obj_gt[:, 0] - world_t_exp_obj[:, 0]):.2e} m."
+        )
+
 
 if args.save_path is not None:
     save_path = Path(args.save_path)
